@@ -79,10 +79,11 @@
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, #8b949e 100%);
+            background: linear-gradient(135deg, #fff 0%, #fbbf24 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -2px;
         }
 
         .description {
@@ -323,18 +324,12 @@
             <div class="derivation-card" id="ch1">
                 <span class="section-tag">Chapter 1: Relations & Functions</span>
                 <h2>Theorem: Equivalence Relation Proof</h2>
-                <div class="proof-step">
-                    <span class="step-title">Reflexivity</span>
-                    For any $a \in A$, if $(a, a) \in R$, relation is Reflexive.
+                <div class="proof-step"><span class="step-title">Reflexivity</span>For any $a \in A$, if $(a, a) \in R$,
+                    relation is Reflexive.</div>
+                <div class="proof-step"><span class="step-title">Symmetry</span>If $(a, b) \in R \implies (b, a) \in R$.
                 </div>
-                <div class="proof-step">
-                    <span class="step-title">Symmetry</span>
-                    If $(a, b) \in R \implies (b, a) \in R$.
-                </div>
-                <div class="proof-step">
-                    <span class="step-title">Transitivity</span>
-                    If $(a, b) \in R$ and $(b, c) \in R \implies (a, c) \in R$.
-                </div>
+                <div class="proof-step"><span class="step-title">Transitivity</span>If $(a, b) \in R$ and $(b, c) \in R
+                    \implies (a, c) \in R$.</div>
                 <div class="inference">Important: A relation is 'Equivalence' ONLY if it satisfies all three!</div>
             </div>
 
@@ -342,43 +337,51 @@
             <div class="derivation-card" id="ch2">
                 <span class="section-tag">Chapter 2: Inverse Trigo</span>
                 <h2>Proof: $\sin^{-1}x + \cos^{-1}x = \pi/2$</h2>
-                <div class="proof-step">
-                    <span class="step-title">Assumption</span>
-                    Let $\sin^{-1}x = \theta \implies x = \sin\theta$.
-                </div>
-                <div class="proof-step">
-                    <span class="step-title">Complementary Angle</span>
-                    We know that $\sin\theta = \cos(\pi/2 - \theta)$.
-                </div>
-                <div class="proof-step">
-                    <span class="step-title">Inverse Application</span>
-                    $x = \cos(\pi/2 - \theta) \implies \cos^{-1}x = \pi/2 - \theta$.
-                </div>
-                <div class="proof-step">
-                    <span class="step-title">Final Step</span>
-                    Substitute $\theta = \sin^{-1}x$:
+                <div class="proof-step"><span class="step-title">Assumption</span>Let $\sin^{-1}x = \theta \implies x =
+                    \sin\theta$.</div>
+                <div class="proof-step"><span class="step-title">Complementary Angle</span>$\sin\theta = \cos(\pi/2 -
+                    \theta)$.</div>
+                <div class="proof-step"><span class="step-title">Final Step</span>Substitute $\theta = \sin^{-1}x$:
                     <div class="math-block">$\sin^{-1}x + \cos^{-1}x = \pi/2$</div>
                 </div>
                 <div class="qed">Q.E.D.</div>
             </div>
 
+            <!-- CH 3: MATRICES -->
+            <div class="derivation-card" id="ch3">
+                <span class="section-tag">Chapter 3: Matrices</span>
+                <h2>Proof: Inverse of 2x2 Matrix Shortcut</h2>
+                <div class="proof-step"><span class="step-title">Algorithm</span>If $A = \begin{bmatrix} a & b \\ c & d
+                    \end{bmatrix}$ and $|A| \neq 0$:
+                    <div class="math-block">$A^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$
+                    </div>
+                </div>
+                <div class="qed">Tested via $A \cdot A^{-1} = I$</div>
+            </div>
+
+            <!-- CH 4: DETERMINANTS -->
+            <div class="derivation-card" id="ch4">
+                <span class="section-tag">Chapter 4: Determinants</span>
+                <h2>Derivation: Area of Triangle using Determinants</h2>
+                <div class="proof-step"><span class="step-title">Coordinate Setup</span>Let vertices be $(x_1, y_1),
+                    (x_2, y_2), (x_3, y_3)$.</div>
+                <div class="proof-step"><span class="step-title">Determinant Form</span>The area $\Delta$ is given by:
+                    <div class="math-block">$\Delta = \frac{1}{2} \begin{vmatrix} x_1 & y_1 & 1 \\ x_2 & y_2 & 1 \\ x_3
+                        & y_3 & 1 \end{vmatrix}$</div>
+                </div>
+                <div class="inference">If $\Delta = 0$, the points are collinear!</div>
+                <div class="qed">Q.E.D.</div>
+            </div>
 
             <!-- CH 5: CONTINUITY -->
             <div class="derivation-card" id="ch5">
                 <span class="section-tag">Chapter 5: Continuity & Diff</span>
                 <h2>Theorem: Differentiability $\implies$ Continuity</h2>
-                <div class="proof-step">
-                    <span class="step-title">Assumption</span>
-                    If $f(x)$ is differentiable at $c$:
+                <div class="proof-step"><span class="step-title">Assumption</span>If $f(x)$ is differentiable at $c$:
                     <div class="math-block">$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x-c}$ exists.</div>
                 </div>
-                <div class="proof-step">
-                    <span class="step-title">Evaluation</span>
-                    Consider $f(x) - f(c) = \frac{f(x) - f(c)}{x-c} \cdot (x-c)$.
-                </div>
-                <div class="proof-step">
-                    <span class="step-title">Limit Check</span>
-                    Taking limit $x \to c$ on both sides:
+                <div class="proof-step"><span class="step-title">Limit Check</span>Taking limit $x \to c$ on $f(x) -
+                    f(c) = \frac{f(x) - f(c)}{x-c} \cdot (x-c)$:
                     <div class="math-block">$\lim_{x \to c} (f(x) - f(c)) = f'(c) \cdot 0 = 0$</div>
                 </div>
                 <div class="inference">$\lim_{x \to c} f(x) = f(c)$, hence it is continuous.</div>
@@ -388,52 +391,31 @@
             <div class="derivation-card" id="ch6">
                 <span class="section-tag">Chapter 6: Application of Derivatives</span>
                 <h2>Criteria: Increasing/Decreasing Functions</h2>
-                <div class="proof-step">
-                    <span class="step-title">Mean Value Theorem Foundation</span>
-                    Let $x_1 < x_2 \in [a, b]$. </div>
-                        <div class="proof-step">
-                            <span class="step-title">Tangent Slope</span>
-                            If $f'(x) > 0$ for all $x$, then the slope of the tangent is always positive.
-                        </div>
+                <div class="proof-step"><span class="step-title">MVT Foundation</span>Let $x_1 < x_2 \in [a, b]$.</div>
+                        <div class="proof-step"><span class="step-title">Tangent Slope</span>If $f'(x) > 0$ for all $x$,
+                            then the slope of the tangent is always positive.</div>
                         <div class="inference">This proves $f(x_1) < f(x_2)$, strictly increasing!</div>
                         </div>
 
-                        <!-- CH 7: INTEGRALS (Standard) -->
+                        <!-- CH 7: INTEGRALS -->
                         <div class="derivation-card" id="ch7">
                             <span class="section-tag">Chapter 7: Integrals</span>
                             <h2>Derivation: $\int \frac{dx}{x^2+a^2} = \frac{1}{a} \tan^{-1}(x/a) + C$</h2>
-                            <div class="proof-step">
-                                <span class="step-title">Substitution</span>
-                                Use $x = a\tan\theta$, $dx = a\sec^2\theta d\theta$.
-                            </div>
+                            <div class="proof-step"><span class="step-title">Substitution</span>Use $x = a\tan\theta$,
+                                $dx = a\sec^2\theta d\theta$.</div>
                             <div class="math-block">$\int \frac{a\sec^2\theta}{a^2\sec^2\theta} d\theta = \frac{1}{a}
                                 \theta$</div>
                             <div class="qed">Q.E.D.</div>
                         </div>
 
-                        <!-- AOI: PARABOLA AREA (Standard Proof Example) -->
+                        <!-- CH 8: AOI -->
                         <div class="derivation-card" id="ch8">
                             <span class="section-tag">Chapter 8: Application of Integrals</span>
                             <h2>Proof: Area of Parabola $y^2 = 4ax$ up to $x = x_1$</h2>
-
-                            <div class="proof-step">
-                                <span class="step-title">Definite Integral Setup</span>
-                                The area $A$ is given by $2 \int_0^{x_1} y \, dx$ (taking upper and lower symmetry).
-                            </div>
-
-                            <div class="proof-step">
-                                <span class="step-title">Integral Evaluation</span>
-                                $A = 2 \int_0^{x_1} \sqrt{4ax} \, dx = 4\sqrt{a} \int_0^{x_1} x^{1/2} \, dx$
-                            </div>
-
-                            <div class="proof-step">
-                                <span class="step-title">Final Result</span>
-                                <div class="math-block">
-                                    $A = 4\sqrt{a} \left[ \frac{x^{3/2}}{3/2} \right]_0^{x_1} = \frac{8}{3} \sqrt{a}
-                                    x_1^{3/2}$
-                                </div>
-                            </div>
-
+                            <div class="proof-step"><span class="step-title">Integral Setup</span>$A = 2 \int_0^{x_1}
+                                \sqrt{4ax} \, dx = 4\sqrt{a} \int_0^{x_1} x^{1/2} \, dx$</div>
+                            <div class="math-block">$A = 4\sqrt{a} \left[ \frac{x^{3/2}}{3/2} \right]_0^{x_1} =
+                                \frac{8}{3} \sqrt{a} x_1^{3/2}$</div>
                             <div class="qed">Q.E.D.</div>
                         </div>
 
@@ -441,19 +423,9 @@
                         <div class="derivation-card" id="ch9">
                             <span class="section-tag">Chapter 9: Differential Equations</span>
                             <h2>Integrating Factor (I.F.) Derivation</h2>
-                            <div class="proof-step">
-                                <span class="step-title">Form</span>
-                                $\frac{dy}{dx} + Py = Q$.
-                            </div>
-                            <div class="proof-step">
-                                <span class="step-title">Goal</span>
-                                Find a function $M$ such that $M\frac{dy}{dx} + MPy$ is $(My)'$.
-                            </div>
-                            <div class="proof-step">
-                                <span class="step-title">Result</span>
-                                Comparing coefficients: $\frac{dM}{dx} = MP \implies \int \frac{dM}{M} = \int P dx$.
-                                <div class="math-block">$M = e^{\int P dx}$</div>
-                            </div>
+                            <div class="proof-step"><span class="step-title">Form</span>$\frac{dy}{dx} + Py = Q$.</div>
+                            <div class="proof-step"><span class="step-title">Result</span>$M = e^{\int P dx}$ makes the
+                                LHS a perfect derivative $(My)'$.</div>
                             <div class="qed">I.F. Locked.</div>
                         </div>
 
@@ -461,19 +433,13 @@
                         <div class="derivation-card" id="ch10">
                             <span class="section-tag">Chapter 10: Vector Algebra</span>
                             <h2>Projection of $\vec{a}$ on $\vec{b}$</h2>
-                            <div class="proof-step">
-                                <span class="step-title">Trigonometric component</span>
-                                Projection length $= |\vec{a}| \cos \theta$.
-                            </div>
-                            <div class="proof-step">
-                                <span class="step-title">Dot Product link</span>
-                                Since $\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos \theta$:
-                                <div class="math-block">Component $= \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$</div>
-                            </div>
-                            <div class="inference">It is the scalar component along the direction of $\vec{b}$.</div>
+                            <div class="proof-step"><span class="step-title">Component</span>Projection length $=
+                                |\vec{a}| \cos \theta$.</div>
+                            <div class="math-block">Component $= \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$</div>
+                            <div class="inference">It is the scalar length of $\vec{a}$ along $\vec{b}$.</div>
                         </div>
 
-                        <!-- CH 11: 3D (Refined) -->
+                        <!-- CH 11: 3D -->
                         <div class="derivation-card" id="ch11">
                             <span class="section-tag">Chapter 11: 3D Geometry</span>
                             <h2>Proof: Distance of Point from Plane</h2>
@@ -486,50 +452,36 @@
                         <div class="derivation-card" id="ch12">
                             <span class="section-tag">Chapter 12: Linear Programming</span>
                             <h2>Corner Point Principle</h2>
-                            <div class="proof-step">
-                                <span class="step-title">Feasible Region</span>
-                                The solution space is a convex polygon.
-                            </div>
-                            <div class="inference">Optimal value of objective function occurs at the EXTREME points
-                                (vertices).</div>
+                            <div class="proof-step"><span class="step-title">Feasible Region</span>Optimal value occurs
+                                at extreme points of the convex polygon.</div>
                         </div>
 
-                        <!-- CH 13: PROBABILITY (Bayes') -->
+                        <!-- CH 13: PROBABILITY -->
                         <div class="derivation-card" id="ch13">
                             <span class="section-tag">Chapter 13: Probability</span>
                             <h2>Proof: Bayes' Theorem Formula</h2>
                             <div class="math-block">$P(E_i|A) = \frac{P(E_i)P(A|E_i)}{\sum P(E_j)P(A|E_j)}$</div>
-                            <div class="qed">Based on Conditional Probability</div>
+                            <div class="qed">Q.E.D.</div>
                         </div>
                 </div>
+
+                <footer>
+                    <p>Made with <span class="heart">❤</span> by Pratik — For Ishu's Board Mission 2026</p>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">Everything you need to prove you're the best!
+                    </p>
+                </footer>
             </div>
 
-            <footer>
-                <p>Made with <span class="heart">❤</span> by Pratik — For Ishu's Board Mission 2026</p>
-                <p style="color: var(--text-muted); margin-top: 1rem;">Everything you need to prove you're the best!</p>
-            </footer>
-        </div>
-
-        <script>
-            // Smooth scrolling for navigation
-            document.querySelectorAll('.nav-item').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
+            <script>
+                document.querySelectorAll('.nav-item').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
                     });
                 });
-            });
-
-            // MathJax notification for progress
-            window.addEventListener('load', () => {
-                if (window.MathJax) {
-                    MathJax.typesetPromise().then(() => {
-                        console.log("Proofs Rendered Successfully!");
-                    });
-                }
-            });
-        </script>
+            </script>
 </body>
 
 </html>
