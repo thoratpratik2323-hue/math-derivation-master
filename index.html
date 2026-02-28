@@ -81,8 +81,8 @@
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #fff 0%, #8b949e 100%);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -2px;
+            background-clip: text;
+            color: transparent;
         }
 
         .description {
@@ -362,18 +362,6 @@
                 <div class="qed">Q.E.D.</div>
             </div>
 
-            <!-- CH 3: MATRICES (Already there, simplified) -->
-            <div class="derivation-card" id="ch3">
-                <span class="section-tag">Chapter 3: Matrices</span>
-                <h2>Proof: Inverse of 2x2 Matrix Shortcut</h2>
-                <div class="proof-step">
-                    <span class="step-title">Algorithm</span>
-                    If $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ and $|A| \neq 0$:
-                    <div class="math-block">$A^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$
-                    </div>
-                </div>
-                <div class="qed">Tested via $A \cdot A^{-1} = I$</div>
-            </div>
 
             <!-- CH 5: CONTINUITY -->
             <div class="derivation-card" id="ch5">
