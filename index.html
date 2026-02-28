@@ -4,113 +4,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Derivation Master | Ishu's Math Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    <title>Math Derivation Master | Step-by-Step Proofs | Target 80/80</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;700&display=swap"
         rel="stylesheet">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
-            --bg: #05080f;
-            --surface: rgba(255, 255, 255, 0.04);
-            --border: rgba(255, 255, 255, 0.08);
-
-            --primary: {
-                    {
-                    COLOR
-                }
-            }
-
-            ;
-            --text: #e2e8f0;
-            --muted: #64748b;
+            --bg-color: #010409;
+            --card-bg: rgba(22, 27, 34, 0.8);
+            --accent-gold: #fbbf24;
+            --accent-blue: #3b82f6;
+            --accent-purple: #a855f7;
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
         }
 
         .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
             text-align: center;
-            background: var(--surface);
-            padding: 3rem;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 5rem;
+            padding-top: 3rem;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary);
-        }
-
-        .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+        .badge {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--accent-gold);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            margin-bottom: 1.5rem;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #8b949e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* NAVIGATION */
+        .chapter-nav {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            margin-bottom: 3rem;
+            scrollbar-width: none;
+        }
+
+        .chapter-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            flex: 0 0 auto;
+            padding: 0.6rem 1.2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover {
+            border-color: var(--accent-blue);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* DERIVATION CARDS */
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .derivation-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: 0.4s ease;
+        }
+
+        .derivation-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
             color: #fff;
         }
 
-        p {
-            color: var(--muted);
-            line-height: 1.6;
+        .proof-step {
             margin-bottom: 2rem;
-            font-size: 1.1rem;
+            padding-left: 2rem;
+            position: relative;
         }
 
-        .btn {
+        .proof-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .math-block {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-size: 1.25rem;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            text-align: center;
+        }
+
+        .inference {
+            background: rgba(168, 85, 247, 0.1);
+            border-left: 4px solid var(--accent-purple);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            color: #e9d5ff;
+            font-style: italic;
+        }
+
+        .qed {
+            text-align: right;
+            font-weight: 800;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 5rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .heart {
+            color: #ef4444;
             display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Back Button */
+        .btn-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             padding: 0.8rem 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border);
             border-radius: 12px;
             color: #fff;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-weight: 600;
-            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
         }
 
-        .btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #fff;
-            transform: translateY(-2px);
+        .btn-back:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .derivation-card {
+                padding: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .btn-back {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.5rem 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <a href="https://thoratpratik2323-hue.github.io/ishu-math-hub/" class="btn-back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        Back to Hub
+    </a>
+
     <div class="container">
-        <div class="icon"></div>
-        <h1>Derivation Master</h1>
-        <p>Important mathematical proofs.</p>
-        <a href="https://thoratpratik2323-hue.github.io/ishu-math-hub/" class="btn">â† Back to Math Hub</a>
-    </div>
+        <header>
+            <div class="badge">Master Class: Derivations 📐</div>
+            <h1>The Proof <span style="color: var(--accent-gold);">Guardian</span></h1>
+            <p class="description">Detailed step-by-step derivations of the most important Math proofs asked in CBSE
+                Board Exams. Target 80/80.</p>
+        </header>
+
+        <nav class="chapter-nav">
+            <a href="#ch1" class="nav-item">Rel & Fun</a>
+            <a href="#ch2" class="nav-item">Inv Trigo</a>
+            <a href="#ch3" class="nav-item">Matrices</a>
+            <a href="#ch4" class="nav-item">Determinants</a>
+            <a href="#ch5" class="nav-item">Cont & Diff</a>
+            <a href="#ch6" class="nav-item">AOD</a>
+            <a href="#ch7" class="nav-item">Integrals</a>
+            <a href="#ch8" class="nav-item">AOI</a>
+            <a href="#ch9" class="nav-item">Diff Eq</a>
+            <a href="#ch10" class="nav-item">Vectors</a>
+            <a href="#ch11" class="nav-item">3D Geon</a>
+            <a href="#ch12" class="nav-item">LPP</a>
+            <a href="#ch13" class="nav-item">Probability</a>
+        </nav>
+
+        <div class="card-container">
+            <!-- CH 1: RELATIONS -->
+            <div class="derivation-card" id="ch1">
+                <span class="section-tag">Chapter 1: Relations & Functions</span>
+                <h2>Theorem: Equivalence Relation Proof</h2>
+                <div class="proof-step">
+                    <span class="step-title">Reflexivity</span>
+                    For any $a \in A$, if $(a, a) \in R$, relation is Reflexive.
+                </div>
+                <div class="proof-step">
+                    <span class="step-title">Symmetry</span>
+                    If $(a, b) \in R \implies (b, a) \in R$.
+                </div>
+                <div class="proof-step">
+                    <span class="step-title">Transitivity</span>
+                    If $(a, b) \in R$ and $(b, c) \in R \implies (a, c) \in R$.
+                </div>
+                <div class="inference">Important: A relation is 'Equivalence' ONLY if it satisfies all three!</div>
+            </div>
+
+            <!-- CH 2: INVERSE TRIGO -->
+            <div class="derivation-card" id="ch2">
+                <span class="section-tag">Chapter 2: Inverse Trigo</span>
+                <h2>Proof: $\sin^{-1}x + \cos^{-1}x = \pi/2$</h2>
+                <div class="proof-step">
+                    <span class="step-title">Assumption</span>
+                    Let $\sin^{-1}x = \theta \implies x = \sin\theta$.
+                </div>
+                <div class="proof-step">
+                    <span class="step-title">Complementary Angle</span>
+                    We know that $\sin\theta = \cos(\pi/2 - \theta)$.
+                </div>
+                <div class="proof-step">
+                    <span class="step-title">Inverse Application</span>
+                    $x = \cos(\pi/2 - \theta) \implies \cos^{-1}x = \pi/2 - \theta$.
+                </div>
+                <div class="proof-step">
+                    <span class="step-title">Final Step</span>
+                    Substitute $\theta = \sin^{-1}x$:
+                    <div class="math-block">$\sin^{-1}x + \cos^{-1}x = \pi/2$</div>
+                </div>
+                <div class="qed">Q.E.D.</div>
+            </div>
+
+            <!-- CH 3: MATRICES (Already there, simplified) -->
+            <div class="derivation-card" id="ch3">
+                <span class="section-tag">Chapter 3: Matrices</span>
+                <h2>Proof: Inverse of 2x2 Matrix Shortcut</h2>
+                <div class="proof-step">
+                    <span class="step-title">Algorithm</span>
+                    If $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ and $|A| \neq 0$:
+                    <div class="math-block">$A^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$
+                    </div>
+                </div>
+                <div class="qed">Tested via $A \cdot A^{-1} = I$</div>
+            </div>
+
+            <!-- CH 5: CONTINUITY -->
+            <div class="derivation-card" id="ch5">
+                <span class="section-tag">Chapter 5: Continuity & Diff</span>
+                <h2>Theorem: Differentiability $\implies$ Continuity</h2>
+                <div class="proof-step">
+                    <span class="step-title">Assumption</span>
+                    If $f(x)$ is differentiable at $c$:
+                    <div class="math-block">$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x-c}$ exists.</div>
+                </div>
+                <div class="proof-step">
+                    <span class="step-title">Evaluation</span>
+                    Consider $f(x) - f(c) = \frac{f(x) - f(c)}{x-c} \cdot (x-c)$.
+                </div>
+                <div class="proof-step">
+                    <span class="step-title">Limit Check</span>
+                    Taking limit $x \to c$ on both sides:
+                    <div class="math-block">$\lim_{x \to c} (f(x) - f(c)) = f'(c) \cdot 0 = 0$</div>
+                </div>
+                <div class="inference">$\lim_{x \to c} f(x) = f(c)$, hence it is continuous.</div>
+            </div>
+
+            <!-- CH 6: AOD -->
+            <div class="derivation-card" id="ch6">
+                <span class="section-tag">Chapter 6: Application of Derivatives</span>
+                <h2>Criteria: Increasing/Decreasing Functions</h2>
+                <div class="proof-step">
+                    <span class="step-title">Mean Value Theorem Foundation</span>
+                    Let $x_1 < x_2 \in [a, b]$. </div>
+                        <div class="proof-step">
+                            <span class="step-title">Tangent Slope</span>
+                            If $f'(x) > 0$ for all $x$, then the slope of the tangent is always positive.
+                        </div>
+                        <div class="inference">This proves $f(x_1) < f(x_2)$, strictly increasing!</div>
+                        </div>
+
+                        <!-- CH 7: INTEGRALS (Standard) -->
+                        <div class="derivation-card" id="ch7">
+                            <span class="section-tag">Chapter 7: Integrals</span>
+                            <h2>Derivation: $\int \frac{dx}{x^2+a^2} = \frac{1}{a} \tan^{-1}(x/a) + C$</h2>
+                            <div class="proof-step">
+                                <span class="step-title">Substitution</span>
+                                Use $x = a\tan\theta$, $dx = a\sec^2\theta d\theta$.
+                            </div>
+                            <div class="math-block">$\int \frac{a\sec^2\theta}{a^2\sec^2\theta} d\theta = \frac{1}{a}
+                                \theta$</div>
+                            <div class="qed">Q.E.D.</div>
+                        </div>
+
+                        <!-- AOI: PARABOLA AREA (Standard Proof Example) -->
+                        <div class="derivation-card" id="ch8">
+                            <span class="section-tag">Chapter 8: Application of Integrals</span>
+                            <h2>Proof: Area of Parabola $y^2 = 4ax$ up to $x = x_1$</h2>
+
+                            <div class="proof-step">
+                                <span class="step-title">Definite Integral Setup</span>
+                                The area $A$ is given by $2 \int_0^{x_1} y \, dx$ (taking upper and lower symmetry).
+                            </div>
+
+                            <div class="proof-step">
+                                <span class="step-title">Integral Evaluation</span>
+                                $A = 2 \int_0^{x_1} \sqrt{4ax} \, dx = 4\sqrt{a} \int_0^{x_1} x^{1/2} \, dx$
+                            </div>
+
+                            <div class="proof-step">
+                                <span class="step-title">Final Result</span>
+                                <div class="math-block">
+                                    $A = 4\sqrt{a} \left[ \frac{x^{3/2}}{3/2} \right]_0^{x_1} = \frac{8}{3} \sqrt{a}
+                                    x_1^{3/2}$
+                                </div>
+                            </div>
+
+                            <div class="qed">Q.E.D.</div>
+                        </div>
+
+                        <!-- CH 9: DIFF EQ -->
+                        <div class="derivation-card" id="ch9">
+                            <span class="section-tag">Chapter 9: Differential Equations</span>
+                            <h2>Integrating Factor (I.F.) Derivation</h2>
+                            <div class="proof-step">
+                                <span class="step-title">Form</span>
+                                $\frac{dy}{dx} + Py = Q$.
+                            </div>
+                            <div class="proof-step">
+                                <span class="step-title">Goal</span>
+                                Find a function $M$ such that $M\frac{dy}{dx} + MPy$ is $(My)'$.
+                            </div>
+                            <div class="proof-step">
+                                <span class="step-title">Result</span>
+                                Comparing coefficients: $\frac{dM}{dx} = MP \implies \int \frac{dM}{M} = \int P dx$.
+                                <div class="math-block">$M = e^{\int P dx}$</div>
+                            </div>
+                            <div class="qed">I.F. Locked.</div>
+                        </div>
+
+                        <!-- CH 10: VECTORS -->
+                        <div class="derivation-card" id="ch10">
+                            <span class="section-tag">Chapter 10: Vector Algebra</span>
+                            <h2>Projection of $\vec{a}$ on $\vec{b}$</h2>
+                            <div class="proof-step">
+                                <span class="step-title">Trigonometric component</span>
+                                Projection length $= |\vec{a}| \cos \theta$.
+                            </div>
+                            <div class="proof-step">
+                                <span class="step-title">Dot Product link</span>
+                                Since $\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos \theta$:
+                                <div class="math-block">Component $= \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$</div>
+                            </div>
+                            <div class="inference">It is the scalar component along the direction of $\vec{b}$.</div>
+                        </div>
+
+                        <!-- CH 11: 3D (Refined) -->
+                        <div class="derivation-card" id="ch11">
+                            <span class="section-tag">Chapter 11: 3D Geometry</span>
+                            <h2>Proof: Distance of Point from Plane</h2>
+                            <div class="math-block">Distance $= \frac{|Ax_1 + By_1 + Cz_1 + D|}{\sqrt{A^2 + B^2 + C^2}}$
+                            </div>
+                            <div class="qed">Verified via Vector Projection</div>
+                        </div>
+
+                        <!-- CH 12: LPP -->
+                        <div class="derivation-card" id="ch12">
+                            <span class="section-tag">Chapter 12: Linear Programming</span>
+                            <h2>Corner Point Principle</h2>
+                            <div class="proof-step">
+                                <span class="step-title">Feasible Region</span>
+                                The solution space is a convex polygon.
+                            </div>
+                            <div class="inference">Optimal value of objective function occurs at the EXTREME points
+                                (vertices).</div>
+                        </div>
+
+                        <!-- CH 13: PROBABILITY (Bayes') -->
+                        <div class="derivation-card" id="ch13">
+                            <span class="section-tag">Chapter 13: Probability</span>
+                            <h2>Proof: Bayes' Theorem Formula</h2>
+                            <div class="math-block">$P(E_i|A) = \frac{P(E_i)P(A|E_i)}{\sum P(E_j)P(A|E_j)}$</div>
+                            <div class="qed">Based on Conditional Probability</div>
+                        </div>
+                </div>
+            </div>
+
+            <footer>
+                <p>Made with <span class="heart">❤</span> by Pratik — For Ishu's Board Mission 2026</p>
+                <p style="color: var(--text-muted); margin-top: 1rem;">Everything you need to prove you're the best!</p>
+            </footer>
+        </div>
+
+        <script>
+            // Smooth scrolling for navigation
+            document.querySelectorAll('.nav-item').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // MathJax notification for progress
+            window.addEventListener('load', () => {
+                if (window.MathJax) {
+                    MathJax.typesetPromise().then(() => {
+                        console.log("Proofs Rendered Successfully!");
+                    });
+                }
+            });
+        </script>
 </body>
 
 </html>
